@@ -4,12 +4,14 @@ import com.business.shopbasic.model.Product;
 import com.business.shopbasic.service.ProductService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController("/products")
+@RestController
+@RequestMapping("/products")
 public class ProductsController {
 
 
@@ -19,12 +21,11 @@ public class ProductsController {
         this.productService = productService;
     }
 
-    @RequestMapping("/")
+    @GetMapping("")
     public ResponseEntity<List<Product>> getProducts(){
 
         List<Product> productList = productService.getAllProducts();
         HttpHeaders headers = new HttpHeaders();
-        headers.add("content-type", "text/json");
         headers.add("count", String.valueOf(productList.size()));
         return ResponseEntity.ok().headers(headers).body(productList);
     }
