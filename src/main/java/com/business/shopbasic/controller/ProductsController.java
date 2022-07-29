@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
+@RestController("/products")
 public class ProductsController {
 
 
@@ -19,7 +19,7 @@ public class ProductsController {
         this.productService = productService;
     }
 
-    @RequestMapping("/products")
+    @RequestMapping("/")
     public ResponseEntity<List<Product>> getProducts(){
 
         List<Product> productList = productService.getAllProducts();
