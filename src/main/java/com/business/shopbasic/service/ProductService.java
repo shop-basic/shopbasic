@@ -24,6 +24,17 @@ public class ProductService {
         return productRepository.findAll();
     }
 
+    public Product saveProduct(Product product){
+        return productRepository.save(product);
+    }
+
+    public void deleteProduct(String productId){
+        Product product = getProductById(productId);
+        if(product != null && product.getProductId().equalsIgnoreCase(productId)){
+            productRepository.passivate(productId);
+        }
+    }
+
 
 }
 
