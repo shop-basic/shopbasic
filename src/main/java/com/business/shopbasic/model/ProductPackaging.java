@@ -9,7 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Product {
+public class ProductPackaging {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -23,40 +23,31 @@ public class Product {
                     )
             }
     )
-    private String productId;
-    @NonNull
+    private String productPackagingId;
     private String name;
     private boolean activeFlag;
-    @NonNull
     private String manufacturer;
-    private String avatar;
+    private double price;
+    private int availableUnits;
+    private String packagingUnit;
 
 
-    public Product() {
+    public ProductPackaging() {
     }
 
-    public Product(String productId, @NonNull String name, boolean activeFlag, @NonNull String manufacturer, String avatar) {
-        this.productId = productId;
-        this.name = name;
-        this.activeFlag = activeFlag;
-        this.manufacturer = manufacturer;
-        this.avatar = avatar;
+    public String getProductPackagingId() {
+        return productPackagingId;
     }
 
-    public String getProductId() {
-        return productId;
+    public void setProductPackagingId(String productPackagingId) {
+        this.productPackagingId = productPackagingId;
     }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
-    }
-
-    @NonNull
     public String getName() {
         return name;
     }
 
-    public void setName(@NonNull String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -68,22 +59,35 @@ public class Product {
         this.activeFlag = activeFlag;
     }
 
-    @NonNull
     public String getManufacturer() {
         return manufacturer;
     }
 
-    public void setManufacturer(@NonNull String manufacturer) {
+    public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
     }
 
-    public String getAvatar() {
-        return avatar;
+    public double getPrice() {
+        return price;
     }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public int getAvailableUnits() {
+        return availableUnits;
+    }
+
+    public void setAvailableUnits(int availableUnits) {
+        this.availableUnits = availableUnits;
+    }
+
+    public String getPackagingUnit() {
+        return packagingUnit;
+    }
+
+    public void setPackagingUnit(String packagingUnit) {
+        this.packagingUnit = packagingUnit;
     }
 }
-
-
