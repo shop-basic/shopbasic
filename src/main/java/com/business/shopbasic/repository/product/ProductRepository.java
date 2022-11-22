@@ -1,4 +1,4 @@
-package com.business.shopbasic.repository;
+package com.business.shopbasic.repository.product;
 
 import com.business.shopbasic.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,3 +17,4 @@ public interface ProductRepository extends JpaRepository<Product, String> {
     public int passivate(@Param("productId") String productId);
 
 }
+

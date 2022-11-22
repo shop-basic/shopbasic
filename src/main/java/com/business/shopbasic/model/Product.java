@@ -7,6 +7,7 @@ import org.springframework.lang.NonNull;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.sql.Date;
 
 @Entity
 public class Product {
@@ -30,6 +31,8 @@ public class Product {
     @NonNull
     private String manufacturer;
     private String avatar;
+    private Date createTime;
+    private Date revisionTime;
 
 
     public Product() {
@@ -83,6 +86,22 @@ public class Product {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getRevisionTime() {
+        return revisionTime;
+    }
+
+    public void setRevisionTime(Date revisionTime) {
+        this.revisionTime = revisionTime;
     }
 }
 
