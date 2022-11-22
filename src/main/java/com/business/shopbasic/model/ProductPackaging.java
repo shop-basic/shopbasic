@@ -2,11 +2,11 @@ package com.business.shopbasic.model;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
-import org.springframework.lang.NonNull;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.sql.Date;
 
 @Entity
 public class ProductPackaging {
@@ -30,6 +30,8 @@ public class ProductPackaging {
     private double price;
     private int availableUnits;
     private String packagingUnit;
+    private Date createTime;
+    private Date revisionTime;
 
 
     public ProductPackaging() {
@@ -90,4 +92,21 @@ public class ProductPackaging {
     public void setPackagingUnit(String packagingUnit) {
         this.packagingUnit = packagingUnit;
     }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getRevisionTime() {
+        return revisionTime;
+    }
+
+    public void setRevisionTime(Date revisionTime) {
+        this.revisionTime = revisionTime;
+    }
 }
+
