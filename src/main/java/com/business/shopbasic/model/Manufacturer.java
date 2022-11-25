@@ -3,9 +3,7 @@ package com.business.shopbasic.model;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Manufacturer {
@@ -22,9 +20,9 @@ public class Manufacturer {
                     )
             }
     )
-    String manufacturerId;
-    String name;
-    String address;
+    private String manufacturerId;
+    private String name;
+    private String address;
 
     public Manufacturer() {
     }

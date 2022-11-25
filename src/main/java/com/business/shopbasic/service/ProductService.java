@@ -2,7 +2,7 @@ package com.business.shopbasic.service;
 
 
 import com.business.shopbasic.model.Product;
-import com.business.shopbasic.repository.ProductRepository;
+import com.business.shopbasic.repository.product.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
