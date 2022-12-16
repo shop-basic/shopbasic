@@ -1,5 +1,6 @@
 package com.business.shopbasic.controller;
 
+import com.business.shopbasic.model.AllProductModel;
 import com.business.shopbasic.model.Product;
 import com.business.shopbasic.service.ProductService;
 import org.springframework.http.HttpHeaders;
@@ -26,7 +27,18 @@ public class ProductsController {
     }
 
     @GetMapping("")
-    public ResponseEntity<List<Product>> getProducts(){
+    public ResponseEntity<List<AllProductModel>> getProducts(){
+
+        List<AllProductModel> productList = productService.getAllProductsList();
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("count", String.valueOf(productList.size()));
+        //TODO remove this header
+        headers.add("Access-Control-Allow-Origin", "http://localhost:4200");
+        return ResponseEntity.ok().headers(headers).body(productList);
+    }
+
+    @GetMapping("/full")
+    public ResponseEntity<List<Product>> getProductsFullList(){
 
         List<Product> productList = productService.getAllProducts();
         HttpHeaders headers = new HttpHeaders();
