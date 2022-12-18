@@ -37,11 +37,6 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
@@ -74,6 +69,13 @@
 				<spring.profiles.active>dev</spring.profiles.active>
 				<activatedProperties>dev</activatedProperties>
 			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>com.microsoft.sqlserver</groupId>
+					<artifactId>mssql-jdbc</artifactId>
+					<scope>runtime</scope>
+				</dependency>
+			</dependencies>
 
 
 		</profile>
@@ -83,6 +85,13 @@
 				<spring.profiles.active>prod</spring.profiles.active>
 				<activatedProperties>prod</activatedProperties>
 			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>com.h2database</groupId>
+					<artifactId>h2</artifactId>
+					<scope>runtime</scope>
+				</dependency>
+			</dependencies>
 
 		</profile>
 

@@ -1,8 +1,9 @@
 package com.business.shopbasic.service;
 
 
+import com.business.shopbasic.model.AllProductModel;
 import com.business.shopbasic.model.Product;
-import com.business.shopbasic.repository.ProductRepository;
+import com.business.shopbasic.repository.product.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,6 +25,9 @@ public class ProductService {
         return productRepository.findAll();
     }
 
+    public List<AllProductModel> getAllProductsList(){
+        return productRepository.getAllProducts();
+    }
     public Product saveProduct(Product product){
         return productRepository.save(product);
     }

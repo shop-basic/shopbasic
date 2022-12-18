@@ -1,13 +1,14 @@
 package com.business.shopbasic.model;
 
+import com.business.shopbasic.model.config.PackagingUnit;
+import com.business.shopbasic.model.config.ProductCategory;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.springframework.lang.NonNull;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 public class Product {
@@ -28,22 +29,62 @@ public class Product {
     @NonNull
     private String name;
     private boolean activeFlag;
-    @NonNull
-    private String manufacturer;
     private String avatar;
     private Date createTime;
     private Date revisionTime;
-
+    @ManyToOne
+    @JoinColumn
+    private Manufacturer manufacturer;
+    @ManyToOne
+    @JoinColumn
+    private PackagingUnit packagingUnit;
+    @ManyToOne
+    @JoinColumn
+    private ProductCategory productCategory;
+    @OneToMany
+    @JoinColumn
+    private List<ProductPackaging> packaging;
 
     public Product() {
     }
 
-    public Product(String productId, @NonNull String name, boolean activeFlag, @NonNull String manufacturer, String avatar) {
+    public Product(String productId, @NonNull String name, boolean activeFlag, String avatar, Date createTime, Date revisionTime, Manufacturer manufacturer, PackagingUnit packagingUnit, ProductCategory productCategory, List<ProductPackaging> packaging) {
         this.productId = productId;
         this.name = name;
         this.activeFlag = activeFlag;
-        this.manufacturer = manufacturer;
         this.avatar = avatar;
+        this.createTime = createTime;
+        this.revisionTime = revisionTime;
+        this.manufacturer = manufacturer;
+        this.packagingUnit = packagingUnit;
+        this.productCategory = productCategory;
+        this.packaging = packaging;
+    }
+
+    public Product(String productId, @NonNull String name, boolean activeFlag, String avatar, Date createTime, Date revisionTime, Manufacturer manufacturer) {
+        this.productId = productId;
+        this.name = name;
+        this.activeFlag = activeFlag;
+        this.avatar = avatar;
+        this.createTime = createTime;
+        this.revisionTime = revisionTime;
+        this.manufacturer = manufacturer;
+    }
+
+    public PackagingUnit getPackagingUnit() {
+        return packagingUnit;
+    }
+
+    public void setPackagingUnit(PackagingUnit packagingUnit) {
+        this.packagingUnit = packagingUnit;
+    }
+
+    public Manufacturer getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(Manufacturer manufacturer) {
+        this.manufacturer = manufacturer;
     }
 
     public String getProductId() {
@@ -71,15 +112,6 @@ public class Product {
         this.activeFlag = activeFlag;
     }
 
-    @NonNull
-    public String getManufacturer() {
-        return manufacturer;
-    }
-
-    public void setManufacturer(@NonNull String manufacturer) {
-        this.manufacturer = manufacturer;
-    }
-
     public String getAvatar() {
         return avatar;
     }
@@ -102,6 +134,22 @@ public class Product {
 
     public void setRevisionTime(Date revisionTime) {
         this.revisionTime = revisionTime;
+    }
+
+    public ProductCategory getProductCategory() {
+        return productCategory;
+    }
+
+    public void setProductCategory(ProductCategory productCategory) {
+        this.productCategory = productCategory;
+    }
+
+    public List<ProductPackaging> getPackaging() {
+        return packaging;
+    }
+
+    public void setPackaging(List<ProductPackaging> productPackagings) {
+        this.packaging = productPackagings;
     }
 }
 
