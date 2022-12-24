@@ -7,3 +7,4 @@ public interface AllProductModel {
     String getCategory();
     String getAvatar();
 }
+

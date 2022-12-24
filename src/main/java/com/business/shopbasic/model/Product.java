@@ -8,6 +8,7 @@ import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
@@ -28,10 +29,11 @@ public class Product {
     private String productId;
     @NonNull
     private String name;
+    private String description;
     private boolean activeFlag;
     private String avatar;
-    private Date createTime;
-    private Date revisionTime;
+    private Timestamp createTime;
+    private Timestamp revisionTime;
     @ManyToOne
     @JoinColumn
     private Manufacturer manufacturer;
@@ -48,7 +50,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(String productId, @NonNull String name, boolean activeFlag, String avatar, Date createTime, Date revisionTime, Manufacturer manufacturer, PackagingUnit packagingUnit, ProductCategory productCategory, List<ProductPackaging> packaging) {
+    public Product(String productId, @NonNull String name, boolean activeFlag, String avatar, Timestamp createTime, Timestamp revisionTime, Manufacturer manufacturer, PackagingUnit packagingUnit, ProductCategory productCategory, List<ProductPackaging> packaging, String description) {
         this.productId = productId;
         this.name = name;
         this.activeFlag = activeFlag;
@@ -59,9 +61,10 @@ public class Product {
         this.packagingUnit = packagingUnit;
         this.productCategory = productCategory;
         this.packaging = packaging;
+        this.description = description;
     }
 
-    public Product(String productId, @NonNull String name, boolean activeFlag, String avatar, Date createTime, Date revisionTime, Manufacturer manufacturer) {
+    public Product(String productId, @NonNull String name, boolean activeFlag, String avatar, Timestamp createTime, Timestamp revisionTime, Manufacturer manufacturer, String description) {
         this.productId = productId;
         this.name = name;
         this.activeFlag = activeFlag;
@@ -69,6 +72,7 @@ public class Product {
         this.createTime = createTime;
         this.revisionTime = revisionTime;
         this.manufacturer = manufacturer;
+        this.description = description;
     }
 
     public PackagingUnit getPackagingUnit() {
@@ -120,19 +124,19 @@ public class Product {
         this.avatar = avatar;
     }
 
-    public Date getCreateTime() {
+    public Timestamp getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(Timestamp createTime) {
         this.createTime = createTime;
     }
 
-    public Date getRevisionTime() {
+    public Timestamp getRevisionTime() {
         return revisionTime;
     }
 
-    public void setRevisionTime(Date revisionTime) {
+    public void setRevisionTime(Timestamp revisionTime) {
         this.revisionTime = revisionTime;
     }
 
@@ -150,6 +154,14 @@ public class Product {
 
     public void setPackaging(List<ProductPackaging> productPackagings) {
         this.packaging = productPackagings;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
 

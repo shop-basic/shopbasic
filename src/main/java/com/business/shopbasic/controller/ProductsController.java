@@ -1,7 +1,10 @@
 package com.business.shopbasic.controller;
 
+import com.business.shopbasic.Constants.HttpConstants;
 import com.business.shopbasic.model.AllProductModel;
 import com.business.shopbasic.model.Product;
+import com.business.shopbasic.model.ProductForm;
+import com.business.shopbasic.model.ProductFormItems;
 import com.business.shopbasic.service.ProductService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/products")
@@ -31,28 +37,42 @@ public class ProductsController {
 
         List<AllProductModel> productList = productService.getAllProductsList();
         HttpHeaders headers = new HttpHeaders();
-        headers.add("count", String.valueOf(productList.size()));
-        //TODO remove this header
-        headers.add("Access-Control-Allow-Origin", "http://localhost:4200");
+        headers.add(HttpConstants.COUNT, String.valueOf(productList.size()));
+        return ResponseEntity.ok().headers(headers).body(productList);
+    }
+
+    @GetMapping("/form")
+    public ResponseEntity<ProductFormItems> getProductFormItems(){
+
+        ProductFormItems productList = productService.getProductFormItems();
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpConstants.COUNT, String.valueOf(1));
         return ResponseEntity.ok().headers(headers).body(productList);
     }
 
     @GetMapping("/full")
-    public ResponseEntity<List<Product>> getProductsFullList(){
+    public ResponseEntity<List<Product>> getNewProductOptions(){
 
         List<Product> productList = productService.getAllProducts();
         HttpHeaders headers = new HttpHeaders();
-        headers.add("count", String.valueOf(productList.size()));
+        headers.add(HttpConstants.COUNT, String.valueOf(productList.size()));
         return ResponseEntity.ok().headers(headers).body(productList);
     }
 
     @PostMapping("")
-    public ResponseEntity<Product> addProducts(@RequestBody Product product){
+    public ResponseEntity<Product> addProducts(@RequestBody ProductForm form){
 
+        Product product = new Product();
+        product.setActiveFlag(true);
+        product.setName(form.getName());
+        product.setProductCategory(productService.getProductCategoryById(form.getCategoryId()));
+        product.setManufacturer(productService.getManufacturerById(form.getManufacturerId()));
+        product.setCreateTime(new Timestamp(System.currentTimeMillis()));
+        product.setRevisionTime(new Timestamp(System.currentTimeMillis()));
+        product.setDescription(form.getDescription());
         Product updatedProduct = productService.saveProduct(product);
         HttpHeaders headers = new HttpHeaders();
         return ResponseEntity.accepted().headers(headers).body(updatedProduct);
-
     }
 
     @PutMapping("/update")
@@ -72,3 +92,4 @@ public class ProductsController {
     }
 
 }
+
